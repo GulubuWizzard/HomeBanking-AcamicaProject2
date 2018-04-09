@@ -1,5 +1,7 @@
 //Declaración de variables
-
+var nombreUsuario = "Raul Loureiro";
+var saldoCuenta = 10800;
+var limiteExtraccion = 3000;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
