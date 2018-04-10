@@ -17,8 +17,10 @@ function extraerDinero() {
 
 }
 
-function depositarDinero() {
-
+function depositarDinero(dinero) {
+    var deposito = prompt("Ingrese el monto a depositar");
+    var dinero = parseInt(deposito);
+    saldoCuenta += dinero;
 }
 
 function pagarServicio() {
