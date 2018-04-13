@@ -2,6 +2,10 @@
 var nombreUsuario = "Raul Loureiro";
 var saldoCuenta = 10800;
 var limiteExtraccion = 3000;
+var saldoAgua = 350;
+var saldoTelefono = 425;
+var saldoLuz=210;
+var saldoInternet=570;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
@@ -16,6 +20,7 @@ function sumaDinero(dinero) {
 function restaDinero(dinero){
     saldoCuenta -= dinero;
 }
+
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
     limiteExtraccion = parseInt (prompt("Indique su nuevo limite de extraccion"));
@@ -26,10 +31,19 @@ function cambiarLimiteDeExtraccion() {
 function extraerDinero() {
     var extraccion = parseInt (prompt("Indique el monto a extraer"));
     var saldoAnterior = saldoCuenta;
+    if (extraccion>saldoCuenta) {
+        alert("Saldo insuficiente. Tu saldo actual es " + saldoCuenta +"$");
+     }
+    else if (extraccion > limiteExtraccion){
+        alert("El monto solicitado supera tu limite de extraccion");
+    }
+    else if (extraccion%100!==0) {
+        alert("Este cajero solo entrega billetes de 100$. Por favor ingresa un monto multiplo de 100");
+    }
+    else {
     restaDinero (extraccion);
     actualizarSaldoEnPantalla();
-    alert ("Has Extraido: " + extraccion+"$" + "\nSaldo anterior: " + saldoAnterior+"$" + "\nSaldo actual: " + saldoCuenta+"$");
-
+    alert ("Has Extraido: " + extraccion+"$" + "\nSaldo anterior: " + saldoAnterior+"$" + "\nSaldo actual: " + saldoCuenta+"$");}
 }
 
 function depositarDinero() {
@@ -41,7 +55,7 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
-
+    prompt ()
 }
 
 function transferirDinero() {
