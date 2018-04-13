@@ -55,7 +55,7 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
-    prompt ()
+    prompt ("Ingresa el numero del servicio que deseas pagar:\n1-Agua\n2-Telefono\n3-Luz\n4-Internet")
 }
 
 function transferirDinero() {
