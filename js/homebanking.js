@@ -8,8 +8,11 @@ var saldoLuz=210;
 var saldoInternet=570;
 var cuentaAmiga2 = 7654321;
 var cuantaAmiga1 = 1234567;
+var userPassword = 123456;
+
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
+iniciarSesion();
 cargarNombreEnPantalla();
 actualizarSaldoEnPantalla();
 actualizarLimiteEnPantalla();
@@ -22,6 +25,7 @@ function sumaDinero(dinero) {
 function restaDinero(dinero){
     saldoCuenta -= dinero;
 }
+
 
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
@@ -116,8 +120,19 @@ function transferirDinero() {
 }
 
 function iniciarSesion() {
+    var intentoPassword = parseInt(prompt("Por favor, ingrese la codigo de su cuenta:"));
+    if (intentoPassword!==userPassword){
+            saldoCuenta=0;
+            alert("Codigo incorrecto: Por cuestiones de seguridad, tu dinero ha sido retenido.")
+            actualizarSaldoEnPantalla();
+        ;
+    }
+        else{
+            alert("Bienvenido/a "+nombreUsuario+" ya puedes comenzar a realizar operaciones")
+            
+        }
+    }
 
-}
 
 //Funciones que actualizan el valor de las variables en el HTML
 function cargarNombreEnPantalla() {
