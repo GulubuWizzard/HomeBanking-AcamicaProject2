@@ -6,8 +6,8 @@ var saldoAgua = 350;
 var saldoTelefono = 425;
 var saldoLuz=210;
 var saldoInternet=570;
-var cuantaAmiga1 = 1234567;
 var cuentaAmiga2 = 7654321;
+var cuantaAmiga1 = 1234567;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
@@ -95,6 +95,23 @@ function pagarServicio() {
 
 
 function transferirDinero() {
+    var montoTransferir = parseInt(prompt("Ingrese el monto que desea transferir:"));
+    var saldoAnterior= saldoCuenta;
+    if (montoTransferir>saldoCuenta) {
+        alert("Saldo insuficiente para realizar la transferencia. Su saldo actual es " + saldoCuenta +"$");
+     }
+     else {
+         var cuentaDestino=parseInt(prompt("Por favor, indiquye el numero de cuenta al cual desea realizar la transferencia"));
+         if ((cuentaDestino===cuentaAmiga2)||(cuentaDestino===cuantaAmiga1)){
+            restaDinero(montoTransferir);
+            actualizarSaldoEnPantalla();
+            alert("Se ha transferido: "+montoTransferir+"$"+"\nCuenta Destino: "+cuentaDestino);
+
+         }
+         else{
+             alert("No es posible realizar la transferencia. Solamente esta permitido realizar transferencias entre cuentas amigas")
+         }
+     }
 
 }
 
