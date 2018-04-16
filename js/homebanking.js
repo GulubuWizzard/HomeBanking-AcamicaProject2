@@ -6,6 +6,8 @@ var saldoAgua = 350;
 var saldoTelefono = 425;
 var saldoLuz=210;
 var saldoInternet=570;
+var cuantaAmiga1 = 1234567;
+var cuentaAmiga2 = 7654321;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
@@ -55,8 +57,42 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
-    prompt ("Ingresa el numero del servicio que deseas pagar:\n1-Agua\n2-Telefono\n3-Luz\n4-Internet")
-}
+   var servicioAPagar = prompt("Ingresa el numero del servicio que deseas pagar:\n1-Agua ("+saldoAgua+"$)"+"\n2-Telefono ("+saldoTelefono+"$)"+"\n3-Luz ("+saldoLuz+"$)"+"\n4-Internet ("+saldoInternet+"$)");
+   var saldoAnterior = saldoCuenta;
+   switch(servicioAPagar){
+       case"1":
+            var saldoAPagar = saldoAgua;
+            var servicio="Agua";
+        break;
+        case"2":
+            var saldoAPagar = saldoTelefono;
+            var servicio="Telefono";
+        break;
+        case"3":
+            var saldoAPagar = saldoLuz;
+            var servicio="Luz";
+        break;
+        case"4":
+            var saldoAPagar = saldoInternet;
+            var servicio="Internet";
+        break;
+        default:
+            saldoAPagar = 0;
+            alert("Por favor, ingrese una opcion valida");
+   }
+   if (saldoAPagar>saldoCuenta) {
+        alert("Saldo insuficiente para abonar el servicio. Tu saldo actual es " + saldoCuenta +"$");
+   }
+   else if (saldoAPagar===0){
+
+   }
+    else{
+        restaDinero(saldoAPagar);
+        actualizarSaldoEnPantalla();
+        alert ("Has pagado el servicio" + "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
+    }
+ }
+
 
 function transferirDinero() {
 
