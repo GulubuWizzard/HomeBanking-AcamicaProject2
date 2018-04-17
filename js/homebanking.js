@@ -27,80 +27,99 @@ function restaDinero(dinero){
 
 function agregarCuentaAmiga(){
     var nuevaCuentaAmiga = parseInt (prompt("Por favor, ingrese el numero de cuenta a la cual desea agregar como Cuenta Amiga"));
-    cuentasAmigas.push(nuevaCuentaAmiga);
-    alert("Se ha dado de alta una nueva Cuenta Amiga\nYa puede realizar transferencias a la cuenta: "+nuevaCuentaAmiga);
+    if (isNaN(nuevaCuentaAmiga)){
+        alert("Por favor ingresar solo numeros");
+    }
+    else if (nuevaCuentaAmiga !=null & nuevaCuentaAmiga.length>0){
+        cuentasAmigas.push(nuevaCuentaAmiga);
+        alert("Se ha dado de alta una nueva Cuenta Amiga\nYa puede realizar transferencias a la cuenta: "+nuevaCuentaAmiga);
+    }
 }
 
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
     limiteExtraccion = parseInt (prompt("Indique su nuevo limite de extraccion"));
-    actualizarLimiteEnPantalla();
-    alert ("Tu nuevo limite de extraccion es " + limiteExtraccion+"$");
+    if (isNaN(limiteExtraccion)){
+        alert("Por favor ingresar solo numeros");
+    }
+    else if (limiteExtraccion !=null & limiteExtraccion.length>0){
+        actualizarLimiteEnPantalla();
+        alert ("Tu nuevo limite de extraccion es " + limiteExtraccion+"$");
+    }
 }
 
 function extraerDinero() {
     var extraccion = parseInt (prompt("Indique el monto a extraer"));
     var saldoAnterior = saldoCuenta;
-    if (extraccion>saldoCuenta) {
-        alert("Saldo insuficiente. Tu saldo actual es " + saldoCuenta +"$");
-     }
-    else if (extraccion > limiteExtraccion){
-        alert("El monto solicitado supera tu limite de extraccion");
+    if (isNaN(extraccion)){
+        alert("Por favor ingresar solo numeros");
     }
-    else if (extraccion%100!==0) {
-        alert("Este cajero solo entrega billetes de 100$. Por favor ingresa un monto multiplo de 100");
-    }
-    else {
-    restaDinero (extraccion);
-    actualizarSaldoEnPantalla();
-    alert ("Has Extraido: " + extraccion+"$" + "\nSaldo anterior: " + saldoAnterior+"$" + "\nSaldo actual: " + saldoCuenta+"$");}
+    else if (extraccion !=null & extraccion.length>0){
+        if (extraccion>saldoCuenta) {
+            alert("Saldo insuficiente. Tu saldo actual es " + saldoCuenta +"$");
+        }
+        else if (extraccion > limiteExtraccion){
+            alert("El monto solicitado supera tu limite de extraccion");
+        }
+        else if (extraccion%100!==0) {
+            alert("Este cajero solo entrega billetes de 100$. Por favor ingresa un monto multiplo de 100");
+        }
+        else {
+        restaDinero (extraccion);
+        actualizarSaldoEnPantalla();
+        alert ("Has Extraido: " + extraccion+"$" + "\nSaldo anterior: " + saldoAnterior+"$" + "\nSaldo actual: " + saldoCuenta+"$");}
+        }
 }
 
 function depositarDinero() {
     var deposito = parseInt (prompt("Indica el monto a depositar"));
-    var saldoAnterior = saldoCuenta
-    sumaDinero (deposito);
-    actualizarSaldoEnPantalla();
-    alert ("Has Depositado: " + deposito+"$" + "\nSaldo anterior: " + saldoAnterior+"$" +"\nSaldo actual: " + saldoCuenta+"$");
+    var saldoAnterior = saldoCuenta;
+    if (isNaN(deposito)){
+        alert("Por favor ingresar solo numeros");
+    }
+    else if (deposito !=null & deposito.length>0){
+        sumaDinero (deposito);
+        actualizarSaldoEnPantalla();
+        alert ("Has Depositado: " + deposito+"$" + "\nSaldo anterior: " + saldoAnterior+"$" +"\nSaldo actual: " + saldoCuenta+"$");
+    }
 }
 
 function pagarServicio() {
    var servicioAPagar = prompt("Ingresa el numero correspondiente al servicio que deseas pagar:\n1-Agua ("+saldoAgua+"$)"+"\n2-Telefono ("+saldoTelefono+"$)"+"\n3-Luz ("+saldoLuz+"$)"+"\n4-Internet ("+saldoInternet+"$)");
    var saldoAnterior = saldoCuenta;
-   if (servicioAPagar === null) {
-    return;
-    }
-switch(servicioAPagar){
-    case"1":
-         var saldoAPagar = saldoAgua;
-         var servicio="Agua";
-     break;
-     case"2":
-         var saldoAPagar = saldoTelefono;
-         var servicio="Telefono";
-     break;
-     case"3":
-         var saldoAPagar = saldoLuz;
-         var servicio="Luz";
-     break;
-     case"4":
-         var saldoAPagar = saldoInternet;
-         var servicio="Internet";
-     break;
-     default:
-         saldoAPagar = 0;
-         alert("Por favor, ingrese una opcion valida");
-}
-   if (saldoAPagar>saldoCuenta) {
-        alert("Saldo insuficiente para abonar el servicio. Tu saldo actual es " + saldoCuenta +"$");
-   }
-   else if (saldoAPagar===0){
+   if (servicioAPagar !=null & servicioAPagar.length>0){
+        switch(servicioAPagar){
+            case"1":
+                var saldoAPagar = saldoAgua;
+                var servicio="Agua";
+            break;
+            case"2":
+                var saldoAPagar = saldoTelefono;
+                var servicio="Telefono";
+            break;
+            case"3":
+                var saldoAPagar = saldoLuz;
+                var servicio="Luz";
+            break;
+            case"4":
+                var saldoAPagar = saldoInternet;
+                var servicio="Internet";
+            break;
+            default:
+                saldoAPagar = 0;
+                alert("Por favor, ingrese una opcion valida");
+        }
+        if (saldoAPagar>saldoCuenta) {
+                alert("Saldo insuficiente para abonar el servicio. Tu saldo actual es " + saldoCuenta +"$");
+        }
+        else if (saldoAPagar===0){
 
-   }
-    else{
-        restaDinero(saldoAPagar);
-        actualizarSaldoEnPantalla();
-        alert ("Has pagado el servicio " +servicio+ "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
+        }
+            else{
+                restaDinero(saldoAPagar);
+                actualizarSaldoEnPantalla();
+                alert ("Has pagado el servicio " +servicio+ "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
+            }
     }
  }
 
@@ -108,22 +127,26 @@ switch(servicioAPagar){
 function transferirDinero() {
     var montoTransferir = parseInt(prompt("Ingrese el monto que desea transferir:"));
     var saldoAnterior= saldoCuenta;
-    if (montoTransferir>saldoCuenta) {
-        alert("Saldo insuficiente para realizar la transferencia. Su saldo actual es " + saldoCuenta +"$");
-     }
-     else {
-         var cuentaDestino=parseInt(prompt("Por favor, indique el numero de cuenta al cual desea realizar la transferencia"));
-         if (cuentasAmigas.includes(cuentaDestino)){
-            restaDinero(montoTransferir);
-            actualizarSaldoEnPantalla();
-            alert("Se ha transferido: "+montoTransferir+"$"+"\nCuenta Destino: "+cuentaDestino);
+    if (isNaN(montoTransferir)){
+        alert("Por favor ingresar solo numeros");
+    }
+    else if (montoTransferir !=null & montoTransferir.length>0){
+        if (montoTransferir>saldoCuenta) {
+            alert("Saldo insuficiente para realizar la transferencia. Su saldo actual es " + saldoCuenta +"$");
+        }
+        else {
+            var cuentaDestino=parseInt(prompt("Por favor, indique el numero de cuenta al cual desea realizar la transferencia"));
+            if (cuentasAmigas.includes(cuentaDestino)){
+                restaDinero(montoTransferir);
+                actualizarSaldoEnPantalla();
+                alert("Se ha transferido: "+montoTransferir+"$"+"\nCuenta Destino: "+cuentaDestino);
 
-         }
-         else{
-             alert("No es posible realizar la transferencia. Solamente esta permitido realizar transferencias entre cuentas amigas")
-         }
-     }
-
+            }
+            else{
+                alert("No es posible realizar la transferencia. Solamente esta permitido realizar transferencias entre cuentas amigas")
+            }
+        }
+    }
 }
 
 function iniciarSesion() {
