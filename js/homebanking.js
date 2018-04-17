@@ -26,35 +26,49 @@ function restaDinero(dinero){
 }
 
 function agregarCuentaAmiga(){
-    var nuevaCuentaAmiga = parseInt (prompt("Por favor, ingrese el numero de cuenta a la cual desea agregar como Cuenta Amiga"));
-    if (isNaN(nuevaCuentaAmiga)){
+    var nuevaCuentaAmiga = prompt("Por favor, ingrese el numero de cuenta a la cual desea agregar como Cuenta Amiga");
+    if (nuevaCuentaAmiga===null || nuevaCuentaAmiga===""){
+        return;
+    }
+    var cuentaAmiga = parseInt(nuevaCuentaAmiga);
+    if (isNaN(cuentaAmiga)){
         alert("Por favor ingresar solo numeros");
     }
-    else if (nuevaCuentaAmiga !=null & nuevaCuentaAmiga.length>0){
-        cuentasAmigas.push(nuevaCuentaAmiga);
-        alert("Se ha dado de alta una nueva Cuenta Amiga\nYa puede realizar transferencias a la cuenta: "+nuevaCuentaAmiga);
+    else {
+        cuentasAmigas.push(cuentaAmiga);
+        alert("Se ha dado de alta una nueva Cuenta Amiga\nYa puede realizar transferencias a la cuenta: "+cuentaAmiga);
     }
 }
 
+
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
-    limiteExtraccion = parseInt (prompt("Indique su nuevo limite de extraccion"));
+    nuevoLimiteExtraccion = prompt("Indique su nuevo limite de extraccion");
+    if (nuevoLimiteExtraccion===null || nuevoLimiteExtraccion===""){
+        return;
+    }
+    limiteExtraccion =parseInt(nuevoLimiteExtraccion);
+
     if (isNaN(limiteExtraccion)){
         alert("Por favor ingresar solo numeros");
     }
-    else if (limiteExtraccion !=null & limiteExtraccion.length>0){
+    else {
         actualizarLimiteEnPantalla();
         alert ("Tu nuevo limite de extraccion es " + limiteExtraccion+"$");
     }
 }
 
 function extraerDinero() {
-    var extraccion = parseInt (prompt("Indique el monto a extraer"));
+    var nuevaExtraccion = prompt("Indique el monto a extraer");
+    if (nuevaExtraccion===null || nuevaExtraccion===""){
+        return;
+    }
+    var extraccion = parseInt(nuevaExtraccion);
     var saldoAnterior = saldoCuenta;
     if (isNaN(extraccion)){
         alert("Por favor ingresar solo numeros");
     }
-    else if (extraccion !=null & extraccion.length>0){
+    else{
         if (extraccion>saldoCuenta) {
             alert("Saldo insuficiente. Tu saldo actual es " + saldoCuenta +"$");
         }
@@ -72,12 +86,16 @@ function extraerDinero() {
 }
 
 function depositarDinero() {
-    var deposito = parseInt (prompt("Indica el monto a depositar"));
+    var nuevoDeposito = prompt("Indica el monto a depositar");
+    if (nuevoDeposito===null || nuevoDeposito===""){
+        return;
+    }
+    var deposito = parseInt(nuevoDeposito);
     var saldoAnterior = saldoCuenta;
     if (isNaN(deposito)){
         alert("Por favor ingresar solo numeros");
     }
-    else if (deposito !=null & deposito.length>0){
+    else{
         sumaDinero (deposito);
         actualizarSaldoEnPantalla();
         alert ("Has Depositado: " + deposito+"$" + "\nSaldo anterior: " + saldoAnterior+"$" +"\nSaldo actual: " + saldoCuenta+"$");
@@ -87,8 +105,11 @@ function depositarDinero() {
 function pagarServicio() {
    var servicioAPagar = prompt("Ingresa el numero correspondiente al servicio que deseas pagar:\n1-Agua ("+saldoAgua+"$)"+"\n2-Telefono ("+saldoTelefono+"$)"+"\n3-Luz ("+saldoLuz+"$)"+"\n4-Internet ("+saldoInternet+"$)");
    var saldoAnterior = saldoCuenta;
-   if (servicioAPagar !=null & servicioAPagar.length>0){
-        switch(servicioAPagar){
+   if (servicioAPagar===null || servicioAPagar===""){
+    return;
+}
+
+    switch(servicioAPagar){
             case"1":
                 var saldoAPagar = saldoAgua;
                 var servicio="Agua";
@@ -113,28 +134,31 @@ function pagarServicio() {
                 alert("Saldo insuficiente para abonar el servicio. Tu saldo actual es " + saldoCuenta +"$");
         }
         else if (saldoAPagar===0){
-
+            return;
         }
-            else{
+        else{
                 restaDinero(saldoAPagar);
                 actualizarSaldoEnPantalla();
                 alert ("Has pagado el servicio " +servicio+ "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
             }
     }
- }
+ 
 
 
 function transferirDinero() {
-    var montoTransferir = parseInt(prompt("Ingrese el monto que desea transferir:"));
+    var nuevoMontoTransferir = prompt("Ingrese el monto que desea transferir:");
+    if (nuevoMontoTransferir===null || nuevoMontoTransferir===""){
+        return;
+    }
+    var montoTransferir=parseInt(nuevoMontoTransferir);
     var saldoAnterior= saldoCuenta;
     if (isNaN(montoTransferir)){
         alert("Por favor ingresar solo numeros");
     }
-    else if (montoTransferir !=null & montoTransferir.length>0){
-        if (montoTransferir>saldoCuenta) {
+    else if (montoTransferir>saldoCuenta) {
             alert("Saldo insuficiente para realizar la transferencia. Su saldo actual es " + saldoCuenta +"$");
         }
-        else {
+    else {
             var cuentaDestino=parseInt(prompt("Por favor, indique el numero de cuenta al cual desea realizar la transferencia"));
             if (cuentasAmigas.includes(cuentaDestino)){
                 restaDinero(montoTransferir);
@@ -147,7 +171,6 @@ function transferirDinero() {
             }
         }
     }
-}
 
 function iniciarSesion() {
     var intentoPassword = parseInt(prompt("Por favor, ingrese la codigo de su cuenta:"));
@@ -176,4 +199,3 @@ function actualizarSaldoEnPantalla() {
 function actualizarLimiteEnPantalla() {
     document.getElementById("limite-extraccion").innerHTML = "Tu límite de extracción es: $" + limiteExtraccion;
 }
-
