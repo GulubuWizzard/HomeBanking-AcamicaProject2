@@ -6,8 +6,7 @@ var saldoAgua = 350;
 var saldoTelefono = 425;
 var saldoLuz=210;
 var saldoInternet=570;
-var cuentaAmiga2 = 7654321;
-var cuantaAmiga1 = 1234567;
+var cuentasAmigas = [7654321, 1234567];
 var userPassword = 123456;
 
 
@@ -24,6 +23,12 @@ function sumaDinero(dinero) {
 
 function restaDinero(dinero){
     saldoCuenta -= dinero;
+}
+
+function agregarCuentaAmiga(){
+    var nuevaCuentaAmiga = parseInt (prompt("Por favor, ingrese el numero de cuenta a la cual desea agregar como Cuenta Amiga"));
+    cuentasAmigas.push(nuevaCuentaAmiga);
+    alert("Se ha dado de alta una nueva Cuenta Amiga\nYa puede realizar transferencias a la cuenta: "+nuevaCuentaAmiga);
 }
 
 //Funciones que tenes que completar
@@ -108,7 +113,7 @@ function transferirDinero() {
      }
      else {
          var cuentaDestino=parseInt(prompt("Por favor, indique el numero de cuenta al cual desea realizar la transferencia"));
-         if ((cuentaDestino===cuentaAmiga2)||(cuentaDestino===cuantaAmiga1)){
+         if (cuentasAmigas.includes(cuentaDestino)){
             restaDinero(montoTransferir);
             actualizarSaldoEnPantalla();
             alert("Se ha transferido: "+montoTransferir+"$"+"\nCuenta Destino: "+cuentaDestino);
