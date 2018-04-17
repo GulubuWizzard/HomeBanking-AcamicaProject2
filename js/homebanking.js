@@ -26,7 +26,6 @@ function restaDinero(dinero){
     saldoCuenta -= dinero;
 }
 
-
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
     limiteExtraccion = parseInt (prompt("Indique su nuevo limite de extraccion"));
@@ -61,29 +60,32 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
-   var servicioAPagar = prompt("Ingresa el numero del servicio que deseas pagar:\n1-Agua ("+saldoAgua+"$)"+"\n2-Telefono ("+saldoTelefono+"$)"+"\n3-Luz ("+saldoLuz+"$)"+"\n4-Internet ("+saldoInternet+"$)");
+   var servicioAPagar = prompt("Ingresa el numero correspondiente al servicio que deseas pagar:\n1-Agua ("+saldoAgua+"$)"+"\n2-Telefono ("+saldoTelefono+"$)"+"\n3-Luz ("+saldoLuz+"$)"+"\n4-Internet ("+saldoInternet+"$)");
    var saldoAnterior = saldoCuenta;
-   switch(servicioAPagar){
-       case"1":
-            var saldoAPagar = saldoAgua;
-            var servicio="Agua";
-        break;
-        case"2":
-            var saldoAPagar = saldoTelefono;
-            var servicio="Telefono";
-        break;
-        case"3":
-            var saldoAPagar = saldoLuz;
-            var servicio="Luz";
-        break;
-        case"4":
-            var saldoAPagar = saldoInternet;
-            var servicio="Internet";
-        break;
-        default:
-            saldoAPagar = 0;
-            alert("Por favor, ingrese una opcion valida");
-   }
+   if (servicioAPagar === null) {
+    return;
+    }
+switch(servicioAPagar){
+    case"1":
+         var saldoAPagar = saldoAgua;
+         var servicio="Agua";
+     break;
+     case"2":
+         var saldoAPagar = saldoTelefono;
+         var servicio="Telefono";
+     break;
+     case"3":
+         var saldoAPagar = saldoLuz;
+         var servicio="Luz";
+     break;
+     case"4":
+         var saldoAPagar = saldoInternet;
+         var servicio="Internet";
+     break;
+     default:
+         saldoAPagar = 0;
+         alert("Por favor, ingrese una opcion valida");
+}
    if (saldoAPagar>saldoCuenta) {
         alert("Saldo insuficiente para abonar el servicio. Tu saldo actual es " + saldoCuenta +"$");
    }
@@ -93,7 +95,7 @@ function pagarServicio() {
     else{
         restaDinero(saldoAPagar);
         actualizarSaldoEnPantalla();
-        alert ("Has pagado el servicio" + "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
+        alert ("Has pagado el servicio " +servicio+ "\nSaldo anterior: " + saldoAnterior+"$" +"\nDinero descontado: " + saldoAPagar+"$"+"\nSaldo actual: " + saldoCuenta+"$");
     }
  }
 
@@ -105,7 +107,7 @@ function transferirDinero() {
         alert("Saldo insuficiente para realizar la transferencia. Su saldo actual es " + saldoCuenta +"$");
      }
      else {
-         var cuentaDestino=parseInt(prompt("Por favor, indiquye el numero de cuenta al cual desea realizar la transferencia"));
+         var cuentaDestino=parseInt(prompt("Por favor, indique el numero de cuenta al cual desea realizar la transferencia"));
          if ((cuentaDestino===cuentaAmiga2)||(cuentaDestino===cuantaAmiga1)){
             restaDinero(montoTransferir);
             actualizarSaldoEnPantalla();
