@@ -108,23 +108,24 @@ function pagarServicio() {
    if (servicioAPagar===null || servicioAPagar===""){
     return;
 }
-
+var saldoAPagar;
+var servicio;
     switch(servicioAPagar){
             case"1":
-                var saldoAPagar = saldoAgua;
-                var servicio="Agua";
+                saldoAPagar = saldoAgua;
+                servicio="Agua";
             break;
             case"2":
-                var saldoAPagar = saldoTelefono;
-                var servicio="Telefono";
+                saldoAPagar = saldoTelefono;
+                servicio="Telefono";
             break;
             case"3":
-                var saldoAPagar = saldoLuz;
-                var servicio="Luz";
+                saldoAPagar = saldoLuz;
+                servicio="Luz";
             break;
             case"4":
-                var saldoAPagar = saldoInternet;
-                var servicio="Internet";
+                saldoAPagar = saldoInternet;
+                servicio="Internet";
             break;
             default:
                 saldoAPagar = 0;
